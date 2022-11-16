@@ -18,6 +18,12 @@ class Place extends Model
         'author_id',
     ];
 
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
+ 
+
     public function file()
     {
         return $this->belongsTo(File::class);
