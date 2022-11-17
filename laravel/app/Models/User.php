@@ -12,7 +12,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasApiTokens, HasFactory, Notifiable;
-
+    use Spatie\Permission\Traits\HasRoles;
     /**
      * The attributes that are mass assignable.
      *
