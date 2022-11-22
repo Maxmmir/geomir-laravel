@@ -29,6 +29,15 @@ class VisibilityCrudController extends CrudController
         CRUD::setModel(\App\Models\Visibility::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/visibility');
         CRUD::setEntityNameStrings('visibility', 'visibilities');
+
+
+        //No sé si esta va aqui:
+        if (!backpack_user()->hasPermissionTo('users.list')) {
+            CRUD::denyAccess('list');
+        }
+        if (!backpack_user()->hasRole('admin')) {
+            CRUD::denyAccess(['list','create','read','update','delete']);
+        }
     }
 
     /**
