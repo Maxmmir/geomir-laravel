@@ -20,10 +20,10 @@ class RoleSeeder extends Seeder
         Role::create(['id' => Role::EDITOR, 'name' => 'editor']);
         Role::create(['id' => Role::ADMIN,  'name' => 'admin']);
 
-        Artisan::call('db:seed', [
-            '--class' => 'RoleSeeder',
-            '--force' => true
-        ]);
+        // Artisan::call('db:seed', [
+        //     '--class' => 'RoleSeeder',
+        //     '--force' => true
+        // ]);
                  
     }
     
