@@ -27,11 +27,31 @@ class RolsiPermisos extends Seeder
         Permission::create(['name' => 'files.read']);
         Permission::create(['name' => 'files.delete']);
 
+        Permission::create(['name' => 'post.*']);
+        Permission::create(['name' => 'post.list']);
+        Permission::create(['name' => 'post.create']);
+        Permission::create(['name' => 'post.update']);
+        Permission::create(['name' => 'post.read']);
+        Permission::create(['name' => 'post.delete']);
+
+        Permission::create(['name' => 'place.*']);
+        Permission::create(['name' => 'place.list']);
+        Permission::create(['name' => 'place.create']);
+        Permission::create(['name' => 'place.update']);
+        Permission::create(['name' => 'place.read']);
+        Permission::create(['name' => 'place.delete']);
+
+        Permission::create(['name' => 'user.*']);
+        Permission::create(['name' => 'user.list']);
+        Permission::create(['name' => 'user.create']);
+        Permission::create(['name' => 'user.update']);
+        Permission::create(['name' => 'user.read']);
+        Permission::create(['name' => 'user.delete']);
 
 
         $adminRole->givePermissionTo(['*']);
-        $authorRole->givePermissionTo(['read', 'list']);
-        $editorRole->givePermissionTo(['read', 'list']);
+        $authorRole->givePermissionTo(['read', 'list', 'update', 'create']);
+        $editorRole->givePermissionTo(['read', 'list', 'update', 'create']);
 
 
 
@@ -39,10 +59,3 @@ class RolsiPermisos extends Seeder
         $name  = config('admin.name');
         $admin = User::where('admin', $name)->first();
         $admin->assignRole('admin');
-
-
-
-
-
-    }
-}
