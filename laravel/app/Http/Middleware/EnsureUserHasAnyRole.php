@@ -17,12 +17,25 @@ class EnsureUserHasAnyRole
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (in_array($request->user()->role_id, $roles)) {
-            return $next($request);
-        } else {
-            $url = $request->url();
-            return redirect('home')
-                ->with('error', "Access denied to {$url}");
-        }
+    //     if (in_array($request->user()->role_id, $roles)) {
+    //         return $next($request);
+    //     } else {
+    //         $url = $request->url();
+    //         return redirect('home')
+    //             ->with('error', "Access denied to {$url}");
+    //     }
+    
+
+    $user->assignRole('author');
+
+    event(new \Illuminate\Auth\Events\Registered($user));
+
+    $user->sendEmailVerificationNotification();
+
+    return $user;
     }
+
+
+
+
 }
