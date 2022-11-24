@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use app\Http\Models\Role;
+use app\Http\Models\User;
+
 
 class RolsiPermisos extends Seeder
 {
@@ -59,3 +62,5 @@ class RolsiPermisos extends Seeder
         $name  = config('admin.name');
         $admin = User::where('admin', $name)->first();
         $admin->assignRole('admin');
+    }
+}
