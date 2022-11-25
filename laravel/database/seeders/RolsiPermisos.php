@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use app\Http\Models\Role;
 use app\Http\Models\User;
+use app\Http\Models\Permissions;
+// Spatie\Permission\Models\Role;
 
 
 class RolsiPermisos extends Seeder
