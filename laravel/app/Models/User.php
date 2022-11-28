@@ -24,6 +24,8 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<int, string>
      */
+    // public $guard_name = 'web';
+
     protected $fillable = [
         'name',
         'email',
@@ -59,6 +61,6 @@ class User extends Authenticatable implements MustVerifyEmail
        return $this->hasMany(Place::class, 'author_id');
     }
     
-    public $guard_name = 'web';
+    // public $guard_name = 'web';
 
 }

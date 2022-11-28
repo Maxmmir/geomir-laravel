@@ -13,6 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['role_id']);
+            $table->dropColumn('role_id');
+        });
+        Schema::dropIfExists('roles');
+    }
+
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
@@ -33,30 +48,5 @@ return new class extends Migration
             "--class" => "RoleSeeder",
             "--force" => true
         ]);
-
-
     }
-
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-
-    {
-        Schema::portable('users', function (Blueprint $table) {
-            $table->dropForeign(['role_id']);
-            $table->dropColum('role_id');
-        });
-        Schema::dropIfExists('roles');
-    }
-
-
-
-
-
-
-
 };

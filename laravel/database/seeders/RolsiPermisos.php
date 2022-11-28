@@ -4,9 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use app\Http\Models\Role;
-use app\Http\Models\User;
-
+// use app\Models\Role;
+use app\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RolsiPermisos extends Seeder
 {
@@ -21,6 +22,7 @@ class RolsiPermisos extends Seeder
         $adminRole = Role::create(['name' => 'admin']);
         $authorRole = Role::create(['name' => 'author']);
         $editorRole = Role::create(['name' => 'editor']);
+
 
 
         Permission::create(['name' => 'files.*']);
@@ -53,11 +55,8 @@ class RolsiPermisos extends Seeder
 
 
         $adminRole->givePermissionTo(['*']);
-        $authorRole->givePermissionTo(['read', 'list', 'update', 'create']);
-        $editorRole->givePermissionTo(['read', 'list', 'update', 'create']);
-
-
-
+        $authorRole->givePermissionTo(['list', 'create', 'update', 'read', 'delete']);
+        $editorRole->givePermissionTo(['list', 'create', 'update', 'read', 'delete']);
 
         $name  = config('admin.name');
         $admin = User::where('admin', $name)->first();
