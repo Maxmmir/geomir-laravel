@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-// use app\Http\Models\User;
-use App\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class RoleSeeder extends Seeder
 {
@@ -16,15 +15,10 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(['id' => Role::ADMIN, 'name' => 'admin']);
-        Role::create(['id' => Role::AUTHOR, 'name' => 'author']);
-        Role::create(['id' => Role::EDITOR,  'name' => 'editor']);
-
-        // Artisan::call('db:seed', [
-        //     '--class' => 'RoleSeeder',
-        //     '--force' => true
-        // ]);
-                 
+        DB::table('roles')->insert([
+            ['id' => 1, 'name' => 'author'],
+            ['id' => 2, 'name' => 'editor'],
+            ['id' => 3, 'name' => 'admin'],
+        ]);
     }
-    
 }
