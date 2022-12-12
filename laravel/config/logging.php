@@ -1,4 +1,5 @@
 <?php
+
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -56,15 +57,15 @@ return [
             'ignore_exceptions' => false,
         ],
 
-        'file' => [
+        'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
-        'errorlog' => [
-            'driver' => 'errorlog',
-            'path' => storage_path('LOG_LEVEL', 'debug'),
+        'daily' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
         ],
@@ -117,24 +118,5 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
     ],
-
-'channels' => [
-       'stack' => [
-           'driver' => 'stack',
-           'channels' => ['file', 'errorlog'],
-           'ignore_exceptions' => false,
-       ],
-      
-       'file' => [
-           'driver' => 'single',
-           'path' => storage_path('logs/laravel.log'),
-           'level' => env('LOG_LEVEL', 'debug'),
-       ],
- 
-       'errorlog' => [
-           'driver' => 'errorlog',
-           'level' => env('LOG_LEVEL', 'debug'),
-       ]
-   ],
 
 ];

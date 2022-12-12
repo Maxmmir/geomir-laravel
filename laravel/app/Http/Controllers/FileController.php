@@ -7,17 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class FileController extends Controller
-{   
-
-    public function __construct()
 {
-   $this->middleware('permission:files.list')->only('index');
-   $this->middleware('permission:files.create')->only(['create','store']);
-   $this->middleware('permission:files.read')->only('show');
-   $this->middleware('permission:files.update')->only(['edit','update']);
-   $this->middleware('permission:files.delete')->only('destroy');
-}
-
+    public function __construct()
+    {
+       $this->middleware('permission:files.list')->only('index');
+       $this->middleware('permission:files.create')->only(['create','store']);
+       $this->middleware('permission:files.read')->only('show');
+       $this->middleware('permission:files.update')->only(['edit','update']);
+       $this->middleware('permission:files.delete')->only('destroy');
+    } 
+    
     /**
      * Display a listing of the resource.
      *
@@ -61,7 +60,9 @@ class FileController extends Controller
         if ($ok) {
             // Patró PRG amb missatge d'èxit
             return redirect()->route('files.show', $file)
-                ->with('success', __('File successfully saved'));
+                ->with('success', __(':resource successfully saved', [
+                    'resource' => __('resources.file')
+                ]));
         } else {
             // Patró PRG amb missatge d'error
             return redirect()->route("files.create")
@@ -116,7 +117,9 @@ class FileController extends Controller
         if ($ok) {
             // Patró PRG amb missatge d'èxit
             return redirect()->route('files.show', $file)
-                ->with('success', __('File successfully saved'));
+                ->with('success', __(':resource successfully updated', [
+                    'resource' => __('resources.file')
+                ]));
         } else {
             // Patró PRG amb missatge d'error
             return redirect()->route("files.edit")
@@ -136,6 +139,8 @@ class FileController extends Controller
         $file->diskDelete();
         // Patró PRG amb missatge d'èxit
         return redirect()->route("files.index")
-            ->with('success', __("File succesfully deleted."));
+            ->with('success', __(':resource successfully deleted', [
+                'resource' => __('resources.file')
+            ]));
     }
 }

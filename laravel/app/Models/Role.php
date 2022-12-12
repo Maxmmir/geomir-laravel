@@ -2,31 +2,11 @@
 
 namespace App\Models;
 
+use Spatie\Permission\Models\Role as SpatieRole;
 
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Role extends Model
+class Role extends SpatieRole
 {
-    use HasFactory;
-
-    const AUTHOR = 1;
-    const EDITOR = 2;
-    const ADMIN  = 3;
-
-    protected $fillable = [
-        'id',
-        'name',
-    ];
+    const AUTHOR = 'author';
+    const EDITOR = 'editor';
+    const ADMIN  = 'admin';
 }
-
-// use Spatie\Permission\Models\Role as SpatieRole;
- 
-// class Role extends SpatieRole
-// {
-//    const ADMIN = 'admin';
-//    const AUTHOR = 'author';
-//    const EDITOR = 'editor';
-
-// }

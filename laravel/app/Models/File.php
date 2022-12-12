@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use \Backpack\CRUD\app\Models\Traits\CrudTrait;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Log;
@@ -12,7 +11,9 @@ use Illuminate\Support\Facades\Storage;
 
 class File extends Model
 {
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
+    
 
     protected $fillable = [
         'filepath',

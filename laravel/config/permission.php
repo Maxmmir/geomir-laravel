@@ -46,8 +46,6 @@ return [
 
         'permissions' => 'permissions',
 
-
-        'enable_wildcard_permission' => true,
         /*
          * When using the "HasPermissions" trait from this package, we need to know which
          * table should be used to retrieve your models permissions. We have chosen a
@@ -135,7 +133,7 @@ return [
      * By default wildcard permission lookups are disabled.
      */
 
-    'enable_wildcard_permission' => false,
+    'enable_wildcard_permission' => true,
 
     'cache' => [
 
