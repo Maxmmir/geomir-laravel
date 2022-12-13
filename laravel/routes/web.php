@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\FileController;
+// use App\Http\Controllers\FileController;
+use App\Http\Controllers\Api\FileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\LanguageController;
@@ -37,8 +38,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('mail/test', [MailController::class, 'test']);
 
-Route::resource('files', FileController::class)
-    ->middleware(['auth'/*, 'permission:'.P::FILES*/]);
+Route::apiResource('files', FileController::class);
+
+// Route::resource('files', FileController::class)
+//     ->middleware(['auth'/*, 'permission:'.P::FILES*/]);
 
 Route::resource('posts', PostController::class)
     ->middleware(['auth', 'permission:'.P::POSTS]);
