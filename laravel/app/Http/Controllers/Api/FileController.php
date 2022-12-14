@@ -15,10 +15,10 @@ class FileController extends Controller
     public function index()
     {
         //
-        // return response()->json([
-        //     'success':true,
-        //     'data':$File::all()
-        // ], 200);
+        return response()->json([
+            'success'=>true,
+            'data'=>$File::all()
+        ], 200);
     }
 
     /**
@@ -61,6 +61,7 @@ class FileController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -73,6 +74,29 @@ class FileController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // Validar fitxer
+        $validatedData = $request->validate([
+            'upload' => 'required|mimes:gif,jpeg,jpg,png|max:2048'
+        ]);
+
+        // Desar fitxer al disc i actualitzar dades a BD
+        $upload = $request->file('upload');
+        $ok = $file->diskSave($upload);
+
+        if ($ok) {
+            // Patró PRG amb missatge d'èxit
+            return response()->json([
+                'success' => true,
+                'data'    => $file
+            ], 201);
+        } else {
+            return response()->json([
+                'success'  => false,
+                'message' => 'Error updating file'
+            ], 500);
+        }
+
+
     }
 
     /**
@@ -84,5 +108,19 @@ class FileController extends Controller
     public function destroy($id)
     {
         //
+        $file->diskDelete();
+
+        if($file) {
+            return response()->json([
+                'success' => true,
+                'data'    => $file
+            ], 201);
+        } else {
+            return response()->json([
+                'success'  => false,
+                'message' => 'Error deleting file'
+            ], 500);
+        }
+        
     }
 }
