@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\File;
+
 
 class FileController extends Controller
 {
@@ -17,7 +19,7 @@ class FileController extends Controller
         //
         return response()->json([
             'success'=>true,
-            'data'=>$File::all()
+            'data'=>File::all()
         ], 200);
     }
 
@@ -61,6 +63,10 @@ class FileController extends Controller
     public function show($id)
     {
         //
+        return response()->json([
+            'success'=>true,
+            'data'=>$id
+        ], 200);
 
     }
 
