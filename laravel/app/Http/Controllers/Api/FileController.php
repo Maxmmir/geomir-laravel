@@ -63,10 +63,20 @@ class FileController extends Controller
     public function show($id)
     {
         //
-        return response()->json([
-            'success'=>true,
-            'data'=>$id
-        ], 200);
+        $file = File::find($id);
+        
+        if ($file){
+            return response()->json([
+                'success'=>true,
+                'data'=>$file
+            ], 200);
+        }
+        else {
+            return response()->json([
+                'success'  => false,
+                'message' => 'file read notfound'
+            ], 404);
+        }
 
     }
 
@@ -87,21 +97,20 @@ class FileController extends Controller
 
         // Desar fitxer al disc i actualitzar dades a BD
         $upload = $request->file('upload');
+        $file = File::find($id);
         $ok = $file->diskSave($upload);
 
-        if ($ok) {
-            // Patró PRG amb missatge d'èxit
+        if ($ok) { 
             return response()->json([
                 'success' => true,
                 'data'    => $file
-            ], 201);
+            ], 200);
         } else {
             return response()->json([
                 'success'  => false,
                 'message' => 'Error updating file'
-            ], 500);
+            ], 404);
         }
-
 
     }
 
@@ -114,18 +123,20 @@ class FileController extends Controller
     public function destroy($id)
     {
         //
-        $file->diskDelete();
+        //$file->diskDelete();
+        //$ok = false;
+        $file = File::find($id);
 
         if($file) {
             return response()->json([
                 'success' => true,
                 'data'    => $file
-            ], 201);
+            ], 200);
         } else {
             return response()->json([
                 'success'  => false,
-                'message' => 'Error deleting file'
-            ], 500);
+                'message' => 'file delete notfound'
+            ], 404);
         }
         
     }
