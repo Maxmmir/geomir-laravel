@@ -89,6 +89,9 @@ class FileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $file = File::find($id);
+        if($file){
+
         //
         // Validar fitxer
         $validatedData = $request->validate([
@@ -97,7 +100,6 @@ class FileController extends Controller
 
         // Desar fitxer al disc i actualitzar dades a BD
         $upload = $request->file('upload');
-        $file = File::find($id);
         $ok = $file->diskSave($upload);
 
         if ($ok) { 
@@ -108,10 +110,17 @@ class FileController extends Controller
         } else {
             return response()->json([
                 'success'  => false,
-                'message' => 'Error updating file'
-            ], 404);
+                'message' => 'Validation error'
+            ], 422);
         }
 
+    }
+    else{
+        return response()->json([
+            'success'  => false,
+            'message' => 'Error updating file'
+        ], 404);
+    }
     }
 
     /**
